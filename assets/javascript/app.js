@@ -1,10 +1,9 @@
 $(document).ready(function() {
-    
     var counter = 15;
     var timer;
     var revealCounter = 5;
     var revealTimer;
-    var currentQuestion = 0;
+    var currentQuestion = 8;
     var correct = 0;
     var incorrect = 0;
 
@@ -74,8 +73,8 @@ $(document).ready(function() {
     function renderGameOver() {                                         // Function to show final game screen
         clearInterval(timer);                                           // Stop game timer
         $("#time").html(" ");                                           // Hide timer on html
-        $("#game").html("<img src='assets/images/gameover.gif'><h2>You did it!</h2><p>You got " + correct + " correct</p>");      //Display how many correct and incorrect
-
+        //Display how many correct and final game over image
+        $("#game").html("<img src='assets/images/gameover.gif'><h2>You did it!</h2><p>You got " + correct + " correct out of 10!</p>");
     };
 
     function revealCount() {                                            // Answer reveal timer function
@@ -134,7 +133,7 @@ $(document).ready(function() {
         }
         $("#time").html("Timer: " + counter);                           // Adds timer to html
         $("#game").html("<h2>" + question + "</h2>" + htmlChoices);     // Adds question and choices to html
-        if(currentQuestion === 9) {                                     // Ends game after 10 questions
+        if(currentQuestion >= 9) {                                     // Ends game after 10 questions
             renderGameOver();
         }    
     };
