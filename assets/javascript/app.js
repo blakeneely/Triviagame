@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    
     var counter = 15;
     var timer;
     var revealCounter = 5;
@@ -22,7 +23,7 @@ $(document).ready(function() {
         },
         {
             question: "Who is the killer in Friday the 13th(1980)?",
-            choices: ["Freddy Krueger", "Jason Voohies", "Michael Myers", "Jason's mom"],
+            choices: ["Freddy Krueger", "Jason Voohees", "Michael Myers", "Jason's mom"],
             answer: "Jason's mom"
         },
         {
@@ -62,21 +63,24 @@ $(document).ready(function() {
         },
     ];
 
-    function revealCount() {
+    function revealCount() {                                            // Answer reveal timer function
         revealCounter--;
         if (revealCounter === 0) {
+            clearInterval(revealTimer);
             renderQuestion();
+            checkAnswer();
         }
     };
 
-    function count() {
+    function count() {                                                  // Main game timer function
         counter--;                                                      // Deducts 1 from counter each interval
         $("#time").html("Timer: " + counter);                           // Updates html with current counter value with each interval
         if (counter === 0) {                                            // Checks if time runs out
+            showAnswer();
             clearInterval(timer);                                       // Stops timer
             incorrect++;                                                // Increases incorrect count
             currentQuestion++;                                          // Increases currentQuestion count
-            renderQuestion();                                           // Moves on to next question
+            // renderQuestion();                                           // Moves on to next question
         }
     };
 
@@ -84,14 +88,15 @@ $(document).ready(function() {
         var image = questions[currentQuestion].image;                   // Stores current question image to local image variable
         clearInterval(timer);                                           // Stops question timer
         $("#time").html(" ");                                           // Remove timer from html
+        revealCounter = 5;
         revealTimer = setInterval(revealCount, 1000);                   // Start reveal count
         $("#game").html("<img src=" + image + ">");                     // Show correct answer image on html
-        // renderQuestion();
     };
 
     function checkAnswer() {
         var answer = questions[currentQuestion].answer;                 // Stores current question answer value to local answer variable
         $(".htmlChoices").on("click", function(){                       // On click checks if text from html element matches answer varible
+            console.log(this);
             if($(this).text() === answer) {
                 correct++;                                              // Increase correct count
             }
@@ -105,11 +110,9 @@ $(document).ready(function() {
         });
     };
 
-
     function renderQuestion() {                                         // Function to load question and answers to html
         counter = 15;                                                   // Reset counter back to 15 with every question
         timer = setInterval(count, 1000);
-        clearInterval(revealTimer);
         var question = questions[currentQuestion].question;             // Assigns question value from questions array to question variable
         var choicesArray = questions[currentQuestion].choices;          // Assigns choices value from choices array to choicesArray variable
         var htmlChoices = "";                                           // Initializes choice variable with empty string
@@ -123,12 +126,13 @@ $(document).ready(function() {
         }    
     };
 
-    $("#start-btn").on("click", function(){                             // Removes start button on click to begin game
-        this.remove();
+    $("#start-btn").on("click", function(){                             
+        this.remove();                                                  // Removes start button on click to begin game
         renderQuestion();                                               // Begins game by loading first question
-        checkAnswer();
+        checkAnswer();                                                  // Loads function for clicking answer
     });
 
 
 
 });
+
