@@ -74,7 +74,7 @@ $(document).ready(function() {
     function renderGameOver() {                                         // Function to show final game screen
         clearInterval(timer);                                           // Stop game timer
         $("#time").html(" ");                                           // Hide timer on html
-        $("#game").html("<h2>You did it!</h2><p>You got " + correct + " correct</p>");      //Display how many correct and incorrect
+        $("#game").html("<img src='assets/images/gameover.gif'><h2>You did it!</h2><p>You got " + correct + " correct</p>");      //Display how many correct and incorrect
 
     };
 
