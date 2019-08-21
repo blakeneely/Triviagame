@@ -24,44 +24,59 @@ $(document).ready(function() {
         {
             question: "Who is the killer in Friday the 13th(1980)?",
             choices: ["Freddy Krueger", "Jason Voohees", "Michael Myers", "Jason's mom"],
-            answer: "Jason's mom"
+            answer: "Jason's mom",
+            image:"assets/images/pamelavoorhees.gif"
         },
         {
             question: "This actor starred in Gladiator",
             choices: ["Russell Crowe", "Mel Gibson", "Gerard Butler", "Tom Hanks"],
-            answer: "Russell Crowe"
+            answer: "Russell Crowe",
+            image: "assets/images/gladiator.gif"
         },
         {
             question: "\"I feel the need, the need for speed\" is from what movie?",
             choices: ["Days of Thunder", "Rocky 2", "Top Gun", "Mad Max"],
-            answer: "Top Gun"
+            answer: "Top Gun",
+            image: "assets/images/topgun.gif"
         },
         {
             question: "Johnny Depp plays which swashbuckling pirate?",
             choices: ["Jack Sparrow", "Davy Jones", "Blackbeard", "Will Turner"],
-            answer: "Jack Sparrow"
+            answer: "Jack Sparrow",
+            image: "assets/images/jacksparrow.gif"
         },
         {
             question: "What is Mickey Mouse's pet dog named:",
             choices: ["Goofy", "Minnie", "Donald", "Pluto"],
-            answer: "Pluto"
+            answer: "Pluto",
+            image: "assets/images/pluto.gif"
         },
         {
             question: "Which movie is famous for the line \"Say hello to my little friend\"?",
             choices: ["Scarface", "American Gangster", "The Godfather", "Goodfellas"],
-            answer: "Scarface"
+            answer: "Scarface",
+            image: "assets/images/scarface.gif"
         },
         {
             question: "What is Brian's fake last name in \"The Fast and the Furious\"?",
             choices: ["O'Conner", "Spilner", "Toretto", "Smith"],
-            answer: "Spilner"
+            answer: "Spilner",
+            image: "assets/images/spilner.jpg"
         },
         {
             question: "What is the name of the 1967 Shelby GT500 in \"Gone in 60 Seconds\"?",
             choices: ["Rosa", "Unicorn", "Felicia", "Eleanor"],
-            answer: "Eleanor"
+            answer: "Eleanor",
+            image: "assets/images/gonein60.gif"
         },
     ];
+
+    function renderGameOver() {                                         // Function to show final game screen
+        clearInterval(timer);                                           // Stop game timer
+        $("#time").html(" ");                                           // Hide timer on html
+        $("#game").html("<h2>You did it!</h2><p>You got " + correct + " correct</p>");      //Display how many correct and incorrect
+
+    };
 
     function revealCount() {                                            // Answer reveal timer function
         revealCounter--;
@@ -73,29 +88,29 @@ $(document).ready(function() {
     };
 
     function count() {                                                  // Main game timer function
-        counter--;                                                      // Deducts 1 from counter each interval
-        $("#time").html("Timer: " + counter);                           // Updates html with current counter value with each interval
-        if (counter === 0) {                                            // Checks if time runs out
+        counter--;                                                      // Deduct 1 from counter each interval
+        $("#time").html("Timer: " + counter);                           // Update html with current counter value with each interval
+        if (counter === 0) {                                            // Check if time runs out
             showAnswer();
-            clearInterval(timer);                                       // Stops timer
-            incorrect++;                                                // Increases incorrect count
-            currentQuestion++;                                          // Increases currentQuestion count
-            // renderQuestion();                                           // Moves on to next question
+            clearInterval(timer);                                       // Stop timer
+            incorrect++;                                                // Increase incorrect count
+            currentQuestion++;                                          // Increase currentQuestion count
         }
     };
 
     function showAnswer() {
-        var image = questions[currentQuestion].image;                   // Stores current question image to local image variable
-        clearInterval(timer);                                           // Stops question timer
+        var image = questions[currentQuestion].image;                   // Store current question image to local image variable
+        var answer = questions[currentQuestion].answer;
+        clearInterval(timer);                                           // Stop question timer
         $("#time").html(" ");                                           // Remove timer from html
-        revealCounter = 5;
+        revealCounter = 5;                                              // Reset revealCounter back to 5
         revealTimer = setInterval(revealCount, 1000);                   // Start reveal count
-        $("#game").html("<img src=" + image + ">");                     // Show correct answer image on html
+        $("#game").html("<img src=" + image + ">" + "<p>" + answer + "</p>");                     // Show correct answer image on html
     };
 
     function checkAnswer() {
-        var answer = questions[currentQuestion].answer;                 // Stores current question answer value to local answer variable
-        $(".htmlChoices").on("click", function(){                       // On click checks if text from html element matches answer varible
+        var answer = questions[currentQuestion].answer;                 // Store current question answer value to local answer variable
+        $(".htmlChoices").on("click", function(){                       // On click check if text from html element matches answer varible
             console.log(this);
             if($(this).text() === answer) {
                 correct++;                                              // Increase correct count
@@ -105,14 +120,12 @@ $(document).ready(function() {
             }
             showAnswer();
             currentQuestion++;                                          // Increase currentQuestion count
-            // renderQuestion();                                           // Loads next question
-            // checkAnswer();                                              // checks for answer
         });
     };
 
     function renderQuestion() {                                         // Function to load question and answers to html
         counter = 15;                                                   // Reset counter back to 15 with every question
-        timer = setInterval(count, 1000);
+        timer = setInterval(count, 1000);                               // Start timer
         var question = questions[currentQuestion].question;             // Assigns question value from questions array to question variable
         var choicesArray = questions[currentQuestion].choices;          // Assigns choices value from choices array to choicesArray variable
         var htmlChoices = "";                                           // Initializes choice variable with empty string
@@ -122,7 +135,7 @@ $(document).ready(function() {
         $("#time").html("Timer: " + counter);                           // Adds timer to html
         $("#game").html("<h2>" + question + "</h2>" + htmlChoices);     // Adds question and choices to html
         if(currentQuestion === 9) {                                     // Ends game after 10 questions
-            $("#game").html("<h2>You did it!</h2><p>You got " + correct + " correct</p>");      //Displays how many correct and incorrect
+            renderGameOver();
         }    
     };
 
