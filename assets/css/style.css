@@ -1,3 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    background: black url("../../assets/images/theater.jpg") no-repeat 50% 50% fixed;
+    background-size: cover;
+    text-align: center;
+}
+
+.container {
+    margin-top: 200px;
+}
+
 .htmlChoices:hover {
     cursor: pointer;
 }
