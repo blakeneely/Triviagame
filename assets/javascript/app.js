@@ -61,7 +61,7 @@ $(document).ready(function() {
             question: "What is Brian's fake last name in \"The Fast and the Furious\"?",
             choices: ["O'Conner", "Spilner", "Toretto", "Smith"],
             answer: "Spilner",
-            image: "assets/images/spilner.jpg"
+            image: "assets/images/spilner.png"
         },
         {
             question: "What is the name of the 1967 Shelby GT500 in \"Gone in 60 Seconds\"?",
@@ -141,6 +141,7 @@ $(document).ready(function() {
 
     $("#start-btn").on("click", function(){                             
         this.remove();                                                  // Removes start button on click to begin game
+        $("h1").remove();
         renderQuestion();                                               // Begins game by loading first question
         checkAnswer();                                                  // Loads function for clicking answer
     });
