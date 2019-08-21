@@ -54,3 +54,10 @@ button {
 .htmlChoices:hover {
     cursor: pointer;
 }
+
+@media only screen and (min-width: 600px) {
+    body {
+        background: black url("../../assets/images/theater.png") no-repeat 50% 50% fixed;
+        background-size: cover;
+    }
+}
