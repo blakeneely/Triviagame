@@ -3,7 +3,7 @@ $(document).ready(function() {
     var timer;
     var revealCounter = 5;
     var revealTimer;
-    var currentQuestion = 8;
+    var currentQuestion = 0;
     var correct = 0;
     var incorrect = 0;
 
