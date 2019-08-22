@@ -55,6 +55,7 @@ button:hover {
 }
 .htmlChoices:hover {
     cursor: pointer;
+    color: #800000;
 }
 .game-container img {
     max-width: 80%;
@@ -75,10 +76,10 @@ button:hover {
         font-size: 26px;
     }
 }
-@media only screen and (min-width: 1000px) {
+/* @media only screen and (min-width: 1000px) {
     .htmlChoices:hover {
         color: #800000;
         border: 1px solid #1a1a1a;
     }    
 
-}
+} */
