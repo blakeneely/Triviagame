@@ -82,8 +82,7 @@ $(document).ready(function() {
         if (revealCounter === 0) {
             clearInterval(revealTimer);
             renderQuestion();
-            checkAnswer();
-        }
+        };
     };
 
     function count() {                                                  // Main game timer function
@@ -94,7 +93,7 @@ $(document).ready(function() {
             clearInterval(timer);                                       // Stop timer
             incorrect++;                                                // Increase incorrect count
             currentQuestion++;                                          // Increase currentQuestion count
-        }
+        };
     };
 
     function showAnswer() {
@@ -107,10 +106,8 @@ $(document).ready(function() {
         $("#game").html("<img src=" + image + ">" + "<p>" + answer + "</p>");                     // Show correct answer image on html
     };
 
-    function checkAnswer() {
-        var answer = questions[currentQuestion].answer;                 // Store current question answer value to local answer variable
-        $(".htmlChoices").on("click", function(){                       // On click check if text from html element matches answer varible
-            console.log(this);
+        $(document).on("click", ".htmlChoices", function(){                       // On click check if text from html element matches answer varible
+            var answer = questions[currentQuestion].answer;                 // Store current question answer value to local answer variable
             if($(this).text() === answer) {
                 correct++;                                              // Increase correct count
             }
@@ -120,7 +117,6 @@ $(document).ready(function() {
             showAnswer();
             currentQuestion++;                                          // Increase currentQuestion count
         });
-    };
 
     function renderQuestion() {                                         // Function to load question and answers to html
         counter = 15;                                                   // Reset counter back to 15 with every question
@@ -130,19 +126,19 @@ $(document).ready(function() {
         var htmlChoices = "";                                           // Initializes choice variable with empty string
         for(var i = 0; i < choicesArray.length; i++) {                  // Loops to add each choice from choiceArray with a p tag
             htmlChoices += "<p class='htmlChoices'>" + choicesArray[i] + "</p>";    // Add class to p for CSS styling
-        }
+        };
         $("#time").html("Timer: " + counter);                           // Adds timer to html
         $("#game").html("<h2>" + question + "</h2>" + htmlChoices);     // Adds question and choices to html
-        if(currentQuestion >= 9) {                                     // Ends game after 10 questions
+        if(currentQuestion > questions.length) {                                     // Ends game after 10 questions
             renderGameOver();
-        }    
+        };    
     };
+
 
     $("#start-btn").on("click", function(){                             
         this.remove();                                                  // Removes start button on click to begin game
         $("h1").remove();
         renderQuestion();                                               // Begins game by loading first question
-        checkAnswer();                                                  // Loads function for clicking answer
     });
 
 
