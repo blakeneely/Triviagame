@@ -29,6 +29,9 @@ button {
     margin: 1em auto;
     display: block;
 }
+button:hover {
+    cursor: pointer;
+}
 .game-container {
     height: 100%;
     margin-top: 150px;
@@ -49,6 +52,9 @@ button {
     margin-right: auto;
     padding: .25em;
     max-width: 50%;
+}
+.htmlChoices:hover {
+    cursor: pointer;
 }
 .game-container img {
     max-width: 80%;
