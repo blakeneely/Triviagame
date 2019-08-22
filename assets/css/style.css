@@ -46,12 +46,12 @@ button:hover {
 }
 .game-container p {
     font-size: 20px;
-    margin-top: .25em;
-    margin-bottom: .25em;
+    margin-top: 1em;
+    margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
-    padding: .25em;
-    max-width: 50%;
+    /* padding: .25em; */
+    /* max-width: 50%; */
 }
 .htmlChoices:hover {
     cursor: pointer;
