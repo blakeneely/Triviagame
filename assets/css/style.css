@@ -77,7 +77,6 @@ button:hover {
 }
 @media only screen and (min-width: 1000px) {
     .htmlChoices:hover {
-        cursor: pointer;
         color: #800000;
         border: 1px solid #1a1a1a;
     }    
