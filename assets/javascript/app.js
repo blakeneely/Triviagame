@@ -70,11 +70,26 @@ $(document).ready(function() {
         },
     ];
 
+    $(document).on("click", "#restart-btn", function(){
+        correct = 0;
+        incorrect = 0;
+        currentQuestion = 0;
+        renderQuestion();
+    });
+
+    function gameOverBTN() {
+        $("game").append("<button id='restart-btn'>RESTART</button")
+    };
+
     function renderGameOver() {                                         // Function to show final game screen
         clearInterval(timer);                                           // Stop game timer
         $("#time").html(" ");                                           // Hide timer on html
         //Display how many correct and final game over image
-        $("#game").html("<img src='assets/images/gameover.gif'><h2>You did it!</h2><p>You got " + correct + " correct out of 10!</p>");
+        $("#game").html("<img src='assets/images/gameover.gif'>" +
+        "<h2>You did it!</h2>" +
+        "<p>You got " + correct + " correct out of 10!</p>" +
+        "<button id='restart-btn'>RESTART</button");
+
     };
 
     function revealCount() {                                            // Answer reveal timer function
@@ -119,6 +134,10 @@ $(document).ready(function() {
         });
 
     function renderQuestion() {                                         // Function to load question and answers to html
+        if(currentQuestion > questions.length - 1) {                                     // Ends game after 10 questions
+            renderGameOver();
+        }
+        else {  
         counter = 15;                                                   // Reset counter back to 15 with every question
         timer = setInterval(count, 1000);                               // Start timer
         var question = questions[currentQuestion].question;             // Assigns question value from questions array to question variable
@@ -129,9 +148,7 @@ $(document).ready(function() {
         };
         $("#time").html("Timer: " + counter);                           // Adds timer to html
         $("#game").html("<h2>" + question + "</h2>" + htmlChoices);     // Adds question and choices to html
-        if(currentQuestion > questions.length) {                                     // Ends game after 10 questions
-            renderGameOver();
-        };    
+        };
     };
 
 
