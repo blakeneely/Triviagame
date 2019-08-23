@@ -10,4 +10,4 @@ This is a triva game written in JavaScript and jQuery. After start, each of the 
 
 ### Mobile view
 
-<img src="assets/images/triviamobile.png" width="150" height="auto">
+<img src="assets/images/triviamobile.png" width="300" height="auto">
